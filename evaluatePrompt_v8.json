@@ -1,0 +1,157 @@
+{
+  "completeness":
+  {
+    "name": "completeness",
+    "instruction": "Evaluate the completeness of the following expression (which may be a full sentence, a phrase, or a single word) on a scale from 1.0 to 5.0.\n- **Evaluate the score with more detailed precision (e.g., 3.2, 4.7).**",
+    "scale_description": {
+      "1.0": "Very incomplete, unclear (hard to understand, ungrammatical or irrelevant)",
+      "2.0": "Somewhat incomplete or confusing",
+      "3.0": "Understandable but may feel unnatural or lacking context",
+      "4.0": "Clear and natural, though could be improved",
+      "5.0": "Fully clear, natural, and appropriate in context"
+    },
+    "examples": [
+      {
+        "expression": "The user plays the desired content.",
+        "score": 5.0,
+        "reason": "Fluent and grammatically correct sentence"
+      },
+      {
+        "expression": "Compressing digital video and",
+        "score": 2.0,
+        "reason": "Incomplete; missing key parts to make it a complete sentence"
+      },
+      {
+        "expression": "Morphing",
+        "score": 4.0,
+        "reason": "Single word but semantically clear and relevant"
+      },
+      {
+        "expression": "송·수신자",
+        "score": 4.0,
+        "reason": "Short phrase but semantically clear in Korean; natural compound noun"
+      },
+      {
+        "expression": "Dithering technique in image processing",
+        "score": 3.5,
+        "reason": "Understandable phrase but lacks full sentence structure"
+      },
+      {
+        "expression": "Is used to",
+        "score": 1.5,
+        "reason": "Incomplete and unclear on its own"
+      },
+      {
+        "expression": "Rendering improves visual quality.",
+        "score": 5.0,
+        "reason": "Complete and grammatically correct"
+      },
+      {
+        "expression": "Anti-aliasing, technique",
+        "score": 2.5,
+        "reason": "Poor phrase structure; lacks fluency"
+      },
+      {
+        "expression": "Which of the following is a technique used in text mining?",
+        "score": 5.0,
+        "reason": "A complete and fluent question"
+      },
+      {
+        "expression": "Which technology is used in image retrieval?",
+        "score": 4.5,
+        "reason": "Clear and meaningful, but slightly less formal"
+      },
+      {
+        "expression": "Which compression technology is used in digital broadcasting and digital libraries?",
+        "score": 4.0,
+        "reason": "Understandable question, but a bit lengthy or less structured"
+      },
+      {
+        "expression": "MPEG-1",
+        "score": 4.5,
+        "reason": "Valid technical expression; semantically complete"
+      },
+      {
+        "expression": "Which of the following is",
+        "score": 3.0,
+        "reason": "Partial question, somewhat understandable but incomplete"
+      },
+      {
+        "expression": "The MPEG",
+        "score": 2.0,
+        "reason": "Grammatically incomplete and lacks clarity"
+      }
+    ],
+    "input_variable": "sentence",
+    "output_format": {
+      "evaluate": "[evaluate completeness]",
+      "Evaluation Score Cause": "[reason for the score]"
+    }
+  },
+  "relevance_correctness_uniqueness":
+  {
+    "name": "relevance_correctness_uniqueness",
+    "instruction": "You are an expert in Natural Language Processing and Linguistics. Evaluate the given multiple-choice question using the following four criteria: semantic similarity, relevance, correctness, and uniqueness.\nPlease provide the output as a valid JSON object. Begin the response with ```json and end with ``` to ensure it is properly formatted for parsing.\nPlease output ONLY the following JSON object (starting from \"semantic_similarity\"), **not wrapped inside any outer field name like \"relevance_correctness_uniqueness\" **\n",
+    "input_variables": {
+      "question": "question",
+      "options": "options",
+      "correct_answer": "correct_answer"
+    },
+    "evaluation_criteria": {
+      "semantic_similarity": {
+        "description": "- Evaluate how semantically similar each option is to the meaning and intent of the question.\n- Focus on whether the option expresses a concept or idea that is close in meaning to the question.\n- This is not about whether the option is the correct answer, but whether it shares a similar semantic space.\n- Do not judge based on surface-level word matching, but on meaning.\n- **Evaluate the score with decimal precision (e.g., 3.2, 4.7).**",
+        "scale": "1.0 - 5.0 (decimals allowed)",
+        "output_format": {
+            "option 1": [
+                "score", "brief explanation of semantic similarity"
+              ],
+              "option 2": [
+                "score", "brief explanation of semantic similarity"
+              ],
+              "option 3": [
+                "score", "brief explanation of semantic similarity"
+              ],
+              "option 4": [
+                "score", "brief explanation of semantic similarity"
+              ]
+        }
+      },
+      "relevance": {
+        "description": "- Evaluate how directly each option relates to the topic or intent of the question.\n- An option may be semantically similar but still irrelevant if it doesn’t address the specific question focus.\n- Relevance should be judged based on logical connection and topical fit.\n- **Evaluate the score with decimal precision (e.g., 3.2, 4.7).**",
+        "scale": "1.0 - 5.0 (decimals allowed)",
+        "output_format": {
+            "option 1": [
+                "score", "brief explanation of relevance to the question"
+              ],
+              "option 2": [
+                "score", "brief explanation of relevance to the question"
+              ],
+              "option 3": [
+                "score", "brief explanation of relevance to the question"
+              ],
+              "option 4": [
+                "score", "brief explanation of relevance to the question"
+              ]
+        }
+      },
+      "correctness": {
+        "description": "- Determine whether the provided correct_answer is actually the best answer to the question.\n- Use your best judgment based on factual correctness, reasoning, and context.\n- If the provided correct_answer is incorrect, specify the correct option number and explain why.\n",
+        "scale": "1 (correct_answer is correct) or 2 (correct_answer is incorrect)",
+        "output_format": {
+          "correct_answer": "option number provided as correct",
+          "generated_answer": "option number GPT believes is correct",
+          "score": "1 or 2",
+          "explanation": "reason why the selected answer is correct or incorrect"
+        }
+      },
+      "uniqueness": {
+        "description": "- Determine whether there is only one clearly correct answer.\n- If multiple options could reasonably be correct, score as not unique.\n- Provide justification for your uniqueness judgment.",
+        "scale": "1 (True, only one correct answer) or 2 (False, multiple correct answers)",
+        "output_format": {
+          "score": "1 or 2", "explanation": "brief reasoning about whether the correct answer is unique"
+        }
+      }
+    },
+    "output_format": "JSON"
+  }
+}
